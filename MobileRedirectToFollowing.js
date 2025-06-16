@@ -10,7 +10,11 @@
 // ==/UserScript==
 
 (function () {
-    if (location.pathname === "/") {
-        location.replace("/directory/following");
-    }
+  const sessionKey = "followingListRedirect";
+  const redirected = sessionStorage.getItem(sessionKey);
+
+  if (!redirected && location.pathname === "/") {
+    location.replace("/directory/following");
+    sessionStorage.setItem(sessionKey, "redirected");
+  }
 })();
